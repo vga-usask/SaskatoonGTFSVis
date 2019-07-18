@@ -1,33 +1,52 @@
-import json
 import gtfsRTBindingtest
+import json
+import glob
+import errno
 
 
-def writeToJSON(dictionary,outputfilepath):
-    jsondata = json.dumps(dictionary)
-    file = open(outputfilepath,"w")
-    file.write(jsondata)
-    file.close()
+def writeToJSON(inputpath):
+
+    files = glob.glob(inputpath+"*pb")
+    for name in files:
+        try:
+            feed = gtfsRTBindingtest.getDataFeed(name)
+            data = gtfsRTBindingtest.getVehiclePosition(feed)
+            file = open(name[:-2]+"json", "w")
+            jsondata = json.dumps(data)
+            file.write(jsondata)
+        except IOError as exc:
+            if exc.errno != errno.EISDIR:
+                raise
+
+
+def mergeJSONFiles(path,tag):
+    result = []
+    for f in glob.glob(path+tag+"*.json"):
+        with open(f, "r") as infile:
+            result.append(json.load(infile))
+
+    with open(path+"merged_"+tag+"_file.json", "w") as outfile:
+        print("_______________")
+        json.dump(result, outfile)
+
 
 if __name__ == "__main__":
+    # VehiclePositionURL = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\VehiclePosition1558994217.pb"
+    # VPOutputFilePath = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\"
+    #
+    # VehiclePositionFeed = gtfsRTBindingtest.getDataFeed(VehiclePositionURL)
+    # VehiclePositionData = gtfsRTBindingtest.getVehiclePosition(VehiclePositionFeed)
+    # # writeToJSON(VehiclePositionData,VPOutputFilePath)
+    #
+    #
+    # TripUpdateURL = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\TripUpdates1558994217.pb"
+    # TUOutputFilePath = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\"
+    #
+    # TripUpdateFeed = gtfsRTBindingtest.getDataFeed(TripUpdateURL)
+    # TripUpdateData = gtfsRTBindingtest.getVehiclePosition(TripUpdateFeed)
 
+    inputpath = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\"
+    writeToJSON(inputpath)
 
-    # r = {'is_claimed': 'True', 'rating': 3.5}
-    # r = json.dumps(r)
-    # loaded_r = json.loads(r)
-    # print(r)
-    # print(type(r))
-    # print(type(loaded_r))
-    VehiclePositionURL = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\VehiclePosition1558994217.pb"
-    VPOutputFilePath = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\VehiclePosition1558994217.json"
-
-    VehiclePositionFeed = gtfsRTBindingtest.getDataFeed(VehiclePositionURL)
-    VehiclePositionData = gtfsRTBindingtest.getVehiclePosition(VehiclePositionFeed)
-    writeToJSON(VehiclePositionData,VPOutputFilePath)
-
-
-    TripUpdateURL = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\TripUpdates1558994217.pb"
-    TUOutputFilePath = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\TripUpdates1558994217.json"
-
-    TripUpdateFeed = gtfsRTBindingtest.getDataFeed(TripUpdateURL)
-    TripUpdateData = gtfsRTBindingtest.getVehiclePosition(TripUpdateFeed)
-    writeToJSON(TripUpdateData,TUOutputFilePath)
+    mergepath = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\"
+    mergeJSONFiles(mergepath,"VehiclePosition")

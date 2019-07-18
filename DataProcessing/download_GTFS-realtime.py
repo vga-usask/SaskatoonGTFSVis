@@ -3,8 +3,8 @@ import datetime
 import time
 
 
-startTime = datetime.datetime(2019, 5, 18, 16, 40, 0)
-endTime = datetime.datetime(2019,5,18,16,41,0)
+startTime = datetime.datetime(2019, 6, 23, 8, 0, 0)
+endTime = datetime.datetime(2019,6,23,11,1,0)
 
 outputPath = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\"
 
@@ -16,5 +16,25 @@ def getGTFSrealtime():
     urllib.request.urlretrieve('http://apps2.saskatoon.ca/app/data/Vehicle/VehiclePositions.pb',outputPath +
                                "VehiclePosition" + str(timestamp) + ".pb")
 
+def main ():
+    while datetime.datetime.now() < startTime:
+        time.sleep(1)
+    #switch = True
+    print("program has just started ")
+    while True:
 
-getGTFSrealtime()
+        if (datetime.datetime.now() > endTime):
+            print("Program terminated")
+            #switch = False
+            return
+        print("time: ",datetime.datetime.now())
+        start = datetime.datetime.now()
+        getGTFSrealtime()
+        end = datetime.datetime.now()
+        exec_time = end - start
+        time.sleep(30 - exec_time.total_seconds()) # change 10s to variable interval for 60 seconds
+
+
+main()
+
+

@@ -1,8 +1,7 @@
-from google.transit import gtfs_realtime_pb2 # used library: gtfs-realtime-binding
+from google.transit import gtfs_realtime_pb2 # used library: gtfs-realtime-bindings
 import urllib.request, os
-from protobuf_to_dict import protobuf_to_dict
-
-
+from protobuf_to_dict import protobuf_to_dict # library protobuf3_to_dict - could use conda to install
+                                                # command: pip install protobuf3-to-dict
 
 # get data feed from gtfs-realtime
 # the function could be used for gathering alert, tripupdate, vehiclepositions from gtfs-realtime
@@ -37,37 +36,23 @@ def getDataFeed(URL):
 
 
 def getVehiclePosition(feed):
-    data = {}
-    # for entity in feed.entity:
-    #   if entity.HasField('vehicle'):
-    #     position = entity.vehicle.position
-    #     data[entity.vehicle.trip.route_id]=[position.latitude,position.longitude]
-    # # print(data)
+
     data = protobuf_to_dict(feed)
     return data
 
 
 def getTripUpdate(feed):
-    # data = {}
-    # for entity in feed.entity:
-    #   if entity.HasField('trip_update'):
-    #     # data[entity.id] = entity.trip_update
-    #     # if entity.trip_update.HasField("stop_time_update"):
-    #     print(entity.trip_update.stop_time_update.arrival)
-    #   print("____________________")
-    # # print(data)
+
     data = protobuf_to_dict(feed)
     return data
 
 
 if __name__ == "__main__":
-    VehiclePositionURL = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\VehiclePosition1558994217.pb"
-    TripUpdateURL = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\TripUpdates1558994217.pb"
+    VehiclePositionURL = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\VehiclePosition1561298400.pb"
+    TripUpdateURL = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\TripUpdates1561298400.pb"
     VehiclePositionFeed = getDataFeed(VehiclePositionURL)
     TripUpdateFeed = getDataFeed(TripUpdateURL)
-    # print(feed)
-    # print(isinstance(getVehiclePosition(VehiclePositionFeed)[str(10570)],set))
-    # the key of this dictionary is a string
+
 
     print(getVehiclePosition(VehiclePositionFeed))
     print(getTripUpdate(TripUpdateFeed))
