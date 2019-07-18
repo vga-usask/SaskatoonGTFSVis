@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<htm>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Example 1 - Saskatoon Map</title>
+        <script type="text/javascript" src="d3.v5.min.js"></script>
+        <!-- <script src="Untitled-2.js"></script> -->
+        <!-- <script src="script.js"></script> -->
+    </head>
+
+    <body>
+        <input style="width: 100%; height: 100%" id="test-input" type="range" min="0" oninput="rangeinput()">
+        <div style="height: 100vh; width: 800px;">
+            <svg viewBox="0 0 800 600" style="margin: 0;" height="100%" width="100%" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+
+        <button id="play" onclick="playHandler()">Play</button> 
+        <button id="pause" onclick="pauseHandler()">Pause</button> 
+
+        <script src="d3group_test.js"></script>
+    </body>
+
+    </html>
