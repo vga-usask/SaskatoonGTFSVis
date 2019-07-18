@@ -19,13 +19,13 @@ def writeToJSON(inputpath):
                 raise
 
 
-def mergeJSONFiles(path,tag):
+def mergeJSONFiles(inputpath,outputpath,tag):
     result = []
-    for f in glob.glob(path+tag+"*.json"):
+    for f in glob.glob(inputpath+tag+"*.json"):
         with open(f, "r") as infile:
             result.append(json.load(infile))
 
-    with open(path+"merged_"+tag+"_file.json", "w") as outfile:
+    with open(outputpath+"merged_"+tag+"_file.json", "w") as outfile:
         print("_______________")
         json.dump(result, outfile)
 
@@ -45,8 +45,8 @@ if __name__ == "__main__":
     # TripUpdateFeed = gtfsRTBindingtest.getDataFeed(TripUpdateURL)
     # TripUpdateData = gtfsRTBindingtest.getVehiclePosition(TripUpdateFeed)
 
-    inputpath = "..\\DataGetterInputExamples"
+    inputpath = "..\\DataGetterInputExamples\\"
     writeToJSON(inputpath)
 
-    mergepath = "..\\DataGetterOutputExamples"
-    mergeJSONFiles(mergepath,"VehiclePosition")
+    mergepath = "..\\DataGetterOutputExamples\\"
+    mergeJSONFiles(inputpath,mergepath,"VehiclePosition")

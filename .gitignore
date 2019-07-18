@@ -1,0 +1,4 @@
+.idea/
+DataGetter/__pycache__/gtfsRTBindingtest.cpython-36.pyc
+*.json
+*.stackdump
