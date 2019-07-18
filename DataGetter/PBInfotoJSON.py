@@ -45,8 +45,8 @@ if __name__ == "__main__":
     # TripUpdateFeed = gtfsRTBindingtest.getDataFeed(TripUpdateURL)
     # TripUpdateData = gtfsRTBindingtest.getVehiclePosition(TripUpdateFeed)
 
-    inputpath = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\"
+    inputpath = "..\\DataGetterInputExamples"
     writeToJSON(inputpath)
 
-    mergepath = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\"
+    mergepath = "..\\DataGetterOutputExamples"
     mergeJSONFiles(mergepath,"VehiclePosition")

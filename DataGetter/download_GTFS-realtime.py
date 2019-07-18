@@ -6,7 +6,7 @@ import time
 startTime = datetime.datetime(2019, 6, 23, 8, 0, 0)
 endTime = datetime.datetime(2019,6,23,11,1,0)
 
-outputPath = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\"
+outputPath = "..\\DataGetterInputExamples"
 
 def getGTFSrealtime():
     timestamp = int(time.time())

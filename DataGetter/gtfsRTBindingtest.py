@@ -48,6 +48,7 @@ def getTripUpdate(feed):
 
 
 if __name__ == "__main__":
+    # code below are for testing
     VehiclePositionURL = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\VehiclePosition1561298400.pb"
     TripUpdateURL = "C:\\Users\\Kevin\\Documents\\GTFS_saskatoon\\Output\\TripUpdates1561298400.pb"
     VehiclePositionFeed = getDataFeed(VehiclePositionURL)
