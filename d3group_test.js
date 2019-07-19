@@ -119,9 +119,7 @@ function compareObjectsbyid(obj1, obj2) {
 }
 
 async function test() {
-    var data = await d3.json("Output/merged_VehiclePosition_file.json");
-
-    
+    var data = await d3.json("./DataGetterOutputExamples/merged_VehiclePosition_file.json");
 
 
     for (i = 0; i < data.length; i++) {
@@ -344,27 +342,6 @@ function playHandler(){
             playHandler();
         }
     }, 50);
-    // if (playIndex<datalist.length && pause ==false){
-    // setTimeout(()=>{
-    //     group.selectAll("circle")
-    //             .data(datalist[playIndex])
-    //             .transition()
-    //             .duration(50)
-
-    //             .attr("cx", d => projection([d.longitude, d.latitude])[0])
-    //             .attr("cy", d => projection([d.longitude, d.latitude])[1]);
-
-    //         playIndex = playIndex + 1
-    //         playHandler();
-    //     },50)
-    // }
-    // // if(document.getElementById('play').clicked == true && pause == true){
-    // //     pause=false
-    // //     playHandler()
-    // // }
-    // else if(playIndex=datalist.length){
-    //     playIndex=0
-    // }
     
     
 }
